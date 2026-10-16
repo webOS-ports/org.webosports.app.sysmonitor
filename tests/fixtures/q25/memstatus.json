@@ -1,0 +1,21 @@
+{
+    "subscribed": false,
+    "returnValue": true,
+    "system": {
+        "level": "normal",
+        "available": 9701,
+        "total": 11772
+    },
+    "threshold": {
+        "low": {
+            "enter": 350,
+            "exit": 380
+        },
+        "critical": {
+            "enter": 200,
+            "exit": 230
+        }
+    },
+    "applications": [
+    ]
+}

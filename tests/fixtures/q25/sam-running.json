@@ -1,0 +1,96 @@
+{
+    "running": [
+        {
+            "appType": "native_qml",
+            "displayId": 0,
+            "instanceId": "2ca3cf0d-31cf-478b-a703-3e458e68ea790",
+            "launchPointId": "org.webosports.app.phone_default",
+            "webprocessid": "",
+            "id": "org.webosports.app.phone",
+            "processid": "24582",
+            "defaultWindowType": "card"
+        },
+        {
+            "appType": "web",
+            "displayId": 0,
+            "instanceId": "2f87d0d4-2c2f-49e4-8e42-f5870af2b65b0",
+            "launchPointId": "com.palm.systemui_default",
+            "webprocessid": "25117",
+            "id": "com.palm.systemui",
+            "processid": "-1",
+            "defaultWindowType": "system_ui"
+        },
+        {
+            "appType": "web",
+            "displayId": 0,
+            "instanceId": "32b20062-218f-4db5-b453-39f941b1a7630",
+            "launchPointId": "com.palm.launcher_default",
+            "webprocessid": "25105",
+            "id": "com.palm.launcher",
+            "processid": "-1",
+            "defaultWindowType": "system_ui"
+        },
+        {
+            "appType": "web",
+            "displayId": 0,
+            "instanceId": "44ad5943-245f-40d5-b362-7753e6cd43950",
+            "launchPointId": "com.palm.app.tasks_default",
+            "webprocessid": "24649",
+            "id": "com.palm.app.tasks",
+            "processid": "-1",
+            "defaultWindowType": "card"
+        },
+        {
+            "appType": "web",
+            "displayId": 0,
+            "instanceId": "4e753318-8ad1-4bf6-aa5b-8f8bdab5a7d30",
+            "launchPointId": "com.palm.app.calendar_default",
+            "webprocessid": "24643",
+            "id": "com.palm.app.calendar",
+            "processid": "-1",
+            "defaultWindowType": "card"
+        },
+        {
+            "appType": "web",
+            "displayId": 0,
+            "instanceId": "6988b00e-1ea0-48c6-b6f9-3f4efb6c18500",
+            "launchPointId": "org.webosports.app.weather_default",
+            "webprocessid": "466372",
+            "id": "org.webosports.app.weather",
+            "processid": "-1",
+            "defaultWindowType": "card"
+        },
+        {
+            "appType": "web",
+            "displayId": 0,
+            "instanceId": "87f028ce-1536-4bdf-ae2e-c15543038b980",
+            "launchPointId": "com.palm.app.email_default",
+            "webprocessid": "25125",
+            "id": "com.palm.app.email",
+            "processid": "-1",
+            "defaultWindowType": "card"
+        },
+        {
+            "appType": "web",
+            "displayId": 0,
+            "instanceId": "8da22ebd-b7af-4ca8-9b83-f76886713cc90",
+            "launchPointId": "com.palm.stark.files_default",
+            "webprocessid": "",
+            "id": "com.palm.stark.files",
+            "processid": "-1",
+            "defaultWindowType": "card"
+        },
+        {
+            "appType": "web",
+            "displayId": 0,
+            "instanceId": "ec75cd52-e2d9-4e06-8f53-d527817b64e80",
+            "launchPointId": "com.webos.app.volume_default",
+            "webprocessid": "24656",
+            "id": "com.webos.app.volume",
+            "processid": "-1",
+            "defaultWindowType": "system_ui"
+        }
+    ],
+    "returnValue": true,
+    "subscribed": false
+}

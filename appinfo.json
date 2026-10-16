@@ -1,0 +1,16 @@
+{
+    "title": "System Monitor",
+    "id": "org.webosports.app.sysmonitor",
+    "version": "1.0.0",
+    "vendor": "webOS Ports",
+    "type": "qml",
+    "main": "qml/main.qml",
+    "noWindow": true,
+    "useWebEngine": false,
+    "useLuneOSStyle": true,
+    "icon": "icon.png",
+    "splashicon": "icon-256x256.png",
+    "uiRevision": "2",
+    "requiredPermissions": [ "application.launcher", "memorymanager.query", "batteryd.management" ],
+    "keywords": [ "System Monitor", "Task manager", "Processes", "CPU", "Memory", "Network", "Storage", "Temperature" ]
+}

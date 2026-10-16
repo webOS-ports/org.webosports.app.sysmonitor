@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- System Monitor's icon: a screen with the CPU's history on it and three
+     meters under it. Rendered to icon.png by tools/make-icon.sh. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="bezel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2f2f2"/>
+      <stop offset="0.5" stop-color="#c8c8c8"/>
+      <stop offset="1" stop-color="#8e8e8e"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#26394d"/>
+      <stop offset="1" stop-color="#0d1621"/>
+    </linearGradient>
+    <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5fd45f" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#5fd45f" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="screenClip">
+      <rect x="38" y="44" width="180" height="168" rx="10"/>
+    </clipPath>
+  </defs>
+  <!-- shadow -->
+  <rect x="26" y="34" width="208" height="200" rx="26" fill="#000000" opacity="0.28"/>
+  <!-- bezel -->
+  <rect x="24" y="28" width="208" height="198" rx="24" fill="url(#bezel)" stroke="#6f6f6f" stroke-width="2"/>
+  <!-- screen -->
+  <rect x="38" y="44" width="180" height="168" rx="10" fill="url(#screen)"/>
+  <g clip-path="url(#screenClip)">
+    <g stroke="#3b5772" stroke-width="2">
+      <line x1="38" y1="72" x2="218" y2="72"/>
+      <line x1="38" y1="100" x2="218" y2="100"/>
+      <line x1="38" y1="128" x2="218" y2="128"/>
+    </g>
+    <path d="M38,124 L58,112 L74,118 L92,86 L110,98 L126,70 L144,92 L160,80 L178,104 L196,76 L218,88 L218,150 L38,150 Z" fill="url(#area)"/>
+    <path d="M38,124 L58,112 L74,118 L92,86 L110,98 L126,70 L144,92 L160,80 L178,104 L196,76 L218,88"
+          fill="none" stroke="#7cf27c" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- meters -->
+    <rect x="54" y="164" width="148" height="10" rx="5" fill="#33475c"/>
+    <rect x="54" y="164" width="104" height="10" rx="5" fill="#4aa3ff"/>
+    <rect x="54" y="184" width="148" height="10" rx="5" fill="#33475c"/>
+    <rect x="54" y="184" width="62" height="10" rx="5" fill="#f0a830"/>
+    <rect x="38" y="44" width="180" height="70" fill="url(#gloss)"/>
+  </g>
+</svg>

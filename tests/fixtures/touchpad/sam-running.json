@@ -1,0 +1,76 @@
+{
+    "running": [
+        {
+            "appType": "web",
+            "displayId": 0,
+            "instanceId": "24343f8e-9fb8-4ffb-946a-059c18ff7e200",
+            "launchPointId": "com.palm.launcher_default",
+            "webprocessid": "3553",
+            "id": "com.palm.launcher",
+            "processid": "-1",
+            "defaultWindowType": "system_ui"
+        },
+        {
+            "appType": "web",
+            "displayId": 0,
+            "instanceId": "7165b2ea-1946-437d-902d-92a00df670c20",
+            "launchPointId": "com.palm.app.email_default",
+            "webprocessid": "3565",
+            "id": "com.palm.app.email",
+            "processid": "-1",
+            "defaultWindowType": "card"
+        },
+        {
+            "appType": "web",
+            "displayId": 0,
+            "instanceId": "851e19e9-f872-4358-928b-abe1560540fe0",
+            "launchPointId": "com.palm.systemui_default",
+            "webprocessid": "3559",
+            "id": "com.palm.systemui",
+            "processid": "-1",
+            "defaultWindowType": "system_ui"
+        },
+        {
+            "appType": "web",
+            "displayId": 0,
+            "instanceId": "8b8926fe-0790-47e7-ada9-d1e89cec5dc50",
+            "launchPointId": "com.palm.app.calendar_default",
+            "webprocessid": "3530",
+            "id": "com.palm.app.calendar",
+            "processid": "-1",
+            "defaultWindowType": "card"
+        },
+        {
+            "appType": "native_qml",
+            "displayId": 0,
+            "instanceId": "904e1b04-0446-43c5-8918-0d7e118669450",
+            "launchPointId": "org.webosports.app.phone_default",
+            "webprocessid": "",
+            "id": "org.webosports.app.phone",
+            "processid": "3335",
+            "defaultWindowType": "card"
+        },
+        {
+            "appType": "web",
+            "displayId": 0,
+            "instanceId": "e2fba4f9-9435-445f-ab68-b587989c39160",
+            "launchPointId": "com.webos.app.volume_default",
+            "webprocessid": "3547",
+            "id": "com.webos.app.volume",
+            "processid": "-1",
+            "defaultWindowType": "system_ui"
+        },
+        {
+            "appType": "web",
+            "displayId": 0,
+            "instanceId": "f519a548-6615-43c2-8f7a-ca20b6cc5da40",
+            "launchPointId": "com.palm.app.tasks_default",
+            "webprocessid": "3518",
+            "id": "com.palm.app.tasks",
+            "processid": "-1",
+            "defaultWindowType": "card"
+        }
+    ],
+    "returnValue": true,
+    "subscribed": false
+}

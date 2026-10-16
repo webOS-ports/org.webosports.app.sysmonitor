@@ -1,0 +1,12 @@
+{
+    "health": "good",
+    "percent_ui": 100,
+    "current_mA": -206,
+    "capacity_mAh": 2946.000000,
+    "percent": 100,
+    "capacity_full_mAh": 2946.000000,
+    "avg_current_mA": -222,
+    "capacity_design_mAh": -1.000000,
+    "voltage_mV": 4221,
+    "temperature_C": 26
+}

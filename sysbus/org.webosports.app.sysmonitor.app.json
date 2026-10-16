@@ -1,0 +1,15 @@
+{
+    "appId": "org.webosports.app.sysmonitor",
+    "type": "regular",
+    "allowedNames": ["org.webosports.app.sysmonitor", "org.webosports.app.sysmonitor-*"],
+    "permissions": [
+        {
+            "service": "org.webosports.app.sysmonitor",
+            "outbound": ["*"]
+        },
+        {
+            "service": "org.webosports.app.sysmonitor-*",
+            "outbound": ["*"]
+        }
+    ]
+}

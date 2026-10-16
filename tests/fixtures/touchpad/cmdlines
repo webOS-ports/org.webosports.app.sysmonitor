@@ -1,0 +1,338 @@
+1	/sbin/init 
+2	
+3	
+5	
+8	
+9	
+10	
+11	
+12	
+14	
+15	
+16	
+17	
+18	
+19	
+20	
+21	
+22	
+23	
+24	
+25	
+26	
+27	
+28	
+29	
+30	
+32	
+33	
+34	
+36	
+37	
+38	
+40	
+41	
+42	
+43	
+44	
+45	
+46	
+47	
+48	
+49	
+50	
+72	
+73	
+74	
+76	
+77	
+78	
+79	
+80	
+81	
+82	
+83	
+84	
+85	
+88	
+89	
+90	
+92	
+100	
+101	
+102	
+103	
+104	
+105	
+106	
+107	
+108	
+110	
+111	
+112	
+113	
+115	
+116	
+117	
+130	
+376	
+377	
+384	
+388	
+392	
+396	
+400	
+404	
+408	
+412	
+416	
+447	
+448	
+453	
+454	
+458	
+459	
+633	/usr/sbin/ls-hubd --conf /etc/luna-service2/ls-hubd.conf 
+638	/usr/lib/systemd/systemd-journald 
+663	
+689	/usr/lib/systemd/systemd-userdbd 
+702	/usr/lib/systemd/systemd-udevd 
+742	avahi-daemon: running [tenderloin-halium.local]
+752	/usr/sbin/connman-vpnd -n 
+753	/usr/sbin/cupsd -l 
+756	/usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only 
+758	/usr/sbin/filecache -c {"log":{"appender":{"type":"syslog"},"levels":{"default":"warning"}}} 
+767	/usr/sbin/LunaBackupAgent 
+776	/usr/sbin/LunaSysService 
+781	/usr/sbin/LunaUniversalSearchMgr 
+790	/usr/sbin/ntpd -u ntp:ntp -n -g 
+792	/usr/sbin/certmgrd 
+796	/usr/sbin/lumberjack 
+800	/usr/sbin/storaged -d -s 
+801	/usr/lib/systemd/systemd-logind 
+805	/usr/sbin/webos-telephonyd 
+843	/usr/sbin/org.webosports.service.ipkg 
+859	/usr/bin/dnsmasq -x /run/dnsmasq.pid -7 /etc/dnsmasq.d --local-service 
+898	/usr/bin/dbus-daemon --syslog --fork --print-pid 4 --print-address 6 --session 
+917	avahi-daemon: chroot helper
+985	
+1084	/usr/libexec/speech-dispatcher-modules/sd_espeak /etc/speech-dispatcher/modules/espeak.conf 
+1148	/usr/bin/adbd 
+1156	/usr/sbin/mojodb-luna -c /etc/palm/db8/tempdb.conf 
+1157	/usr/sbin/luneos-print-adapter 
+1159	/usr/sbin/luneos-vpn-adapter 
+1164	/usr/libexec/mmsd -n 
+1169	/usr/bin/voicecall-manager 
+1174	/bin/sh /usr/sbin/luneos-remote-wakelock watch 
+1191	/usr/sbin/mojodb-luna -c /etc/palm/db8/maindb.conf 
+1201	/usr/sbin/mojodb-luna -c /etc/palm/db8/mediadb.conf 
+1233	/usr/sbin/SettingsService 
+1313	
+1392	
+1399	
+1408	
+1414	
+1416	/usr/sbin/activitymanager -c {"log":{"appender":{"type":"syslog"},"levels":{"default":"notice"}}} 
+1417	/usr/sbin/LunaAuthManager 
+1419	/usr/bin/speech-dispatcher -d -t 0 -S /tmp/xdg/speech-dispatcher/speechd.sock 
+1434	
+1445	
+1447	
+1451	
+1452	
+1471	/usr/bin/lxc-start -n android -l DEBUG -o /var/log/lxc-android.log -- /init 
+1647	/system/bin/init second_stage 
+1651	/usr/sbin/hciattach_awesome -n /dev/ttyHS0 bcsp 
+1653	
+1654	
+1667	
+1668	
+1669	
+1670	
+1676	/usr/libexec/bluetooth/bluetoothd 
+1681	/system/bin/init subcontext u:r:vendor_init:s0 16 
+1695	/system/bin/ueventd 
+1758	
+1767	
+1768	
+1773	
+1791	
+1792	
+1793	
+1794	
+1797	
+1799	
+1803	
+1804	
+1805	
+1806	
+1807	
+1811	
+1812	
+1813	
+1814	
+1815	
+1816	
+1818	/system/bin/logd 
+1819	/system/bin/sh /system/bin/lmkd 
+1820	/system/bin/servicemanager 
+1821	/system/system_ext/bin/hwservicemanager 
+1822	/vendor/bin/vndservicemanager /dev/vndbinder 
+1824	/system/bin/sh 
+1825	/system/bin/sleep 2147483647 
+1838	/system/bin/vold --blkid_context=u:r:blkid:s0 --blkid_untrusted_context=u:r:blkid_untrusted:s0 --fsck_context=u:r:fsck:s0 --fsck_untrusted_context=u:r:fsck_untrusted:s0 
+1847	/system/bin/hw/android.system.suspend-service 
+1853	/system/bin/tombstoned 
+1857	/system/bin/apexd 
+1886	
+1887	
+1888	
+1889	
+1890	
+1891	
+1892	
+1893	
+1894	
+1895	
+1896	
+1897	
+1898	
+1899	
+1900	
+1901	
+1902	
+1903	
+1904	
+1918	
+1920	/vendor/bin/hw/android.hardware.health@2.0-service 
+1923	
+1926	/vendor/bin/ts_srv 
+1930	
+1931	
+1934	/vendor/bin/hw/android.hardware.camera.provider@2.4-service 
+1936	/vendor/bin/hw/android.hardware.configstore@1.1-service 
+1940	
+1941	
+1942	/vendor/bin/hw/android.hardware.graphics.allocator@2.0-service 
+1944	/vendor/bin/hw/android.hardware.graphics.composer@2.1-service 
+1948	
+1955	/vendor/bin/hw/android.hardware.usb@1.0-service.basic 
+1957	
+1959	
+1960	
+2103	/system/bin/mediaserver 
+2138	/usr/sbin/android-property-service 
+2142	/usr/sbin/tenderloin-touch-boost 
+2169	/usr/sbin/mediaindexer 
+2277	/apex/com.android.os.statsd/bin/statsd 
+2285	/system/system_ext/bin/hw/android.hidl.allocator@1.0-service 
+2288	/vendor/bin/hw/android.hardware.wifi@1.0-service 
+2298	/system/bin/credstore /data/misc/credstore 
+2310	/system/bin/traced_probes 
+2322	/system/bin/traced 
+2327	/system/bin/camera_service 
+2331	/system/bin/idmap2d 
+2338	/system/bin/incidentd 
+2364	media.extractor aextractor 
+2366	media.metrics diametrics 
+2371	/system/bin/minimediaservice 
+2377	/system/bin/storaged 
+2383	/system/bin/wificond 
+2396	media.swcodec oid.media.swcodec/bin/mediaswcodec 
+2405	/system/bin/gatekeeperd /data/misc/gatekeeper 
+2471	/usr/sbin/LunaDisplayManager 
+2473	/usr/sbin/com.webos.service.camera2 
+2474	/usr/sbin/configd 
+2475	/usr/sbin/LunaAppManager 
+2477	/usr/sbin/LunaHaptics 
+2478	/usr/sbin/luneos-faced 
+2488	/usr/sbin/torchd 
+2489	/bin/sh /usr/sbin/wlan-suspend-mode 
+2500	tail -f /dev/null 
+2501	luna-send -i -f luna://com.palm.display/control/status {"subscribe":true} 
+2502	/bin/sh /usr/sbin/wlan-suspend-mode 
+2503	/usr/sbin/ofonod -n --noplugin=hfp_bluez5,ril 
+2540	/usr/bin/surface-manager -platform hwcomposer -plugin evdevtouch:/dev/input/event6 -plugin evdevkeyboard 
+2561	/usr/bin/location 
+2580	/usr/sbin/sensorfwd -c=/etc/sensorfw/primaryuse.conf -d --log-level=warning --no-magnetometer-bg-calibration 
+2588	/usr/sbin/batteryd 
+2666	/usr/bin/WebAppMgr --enable-accurate-seek --disable-gpu-vsync --enable-neva-media-service --disable-font-subpixel-positioning --disable-in-process-stack-traces --accelerated-plugin-rendering-blacklist=device;drmAgent;sound;service --allow-file-access-from-files --application-cache-domain-limit=10485760 --application-cache-size=52428800 --autoplay-policy=no-user-gesture-required --browser-subprocess-path=/usr/bin/WebAppMgr --deadline-to-synchronize-surfaces=40 --disable-direct-npapi-requests --disable-extensions --disable-gpu-rasterization --disable-low-res-tiling --disable-web-security --disk-cache-size=33554432 --enable-accelerated-plugin-rendering --enable-aggressive-release-policy --force-max-touch-points=10 --disable-pinch --enable-blink-features=AudioFocusExtension,MediaSourceIsSupportedExtension,MediaTimelineOffset,UMSExtension,LocalResourceCodeCache,CustomEventExtension,WebCodecs,MediaStreamInsertableStreams --disable-blink-features=FontSrcLocalMatching,WebkitBoxLayoutUsesFlexLayout --enable-features=MediaControllerService --local-storage-tracker --enable-devtools-experiments --enable-key-event-throttling --enable-neva-ime --enable-threaded-compositing --enable-watchdog --enable-file-api-directories-and-system --force-gpu-mem-available-mb=60 --fps-counter-layout=tl --hide-selection-handles --ignore-gpu-blacklist --ignore-netif=p2p --in-process-gpu --max-timeupdate-event-frequency=150 --max-unused-resource-memory-usage-percentage=0 --mse-audio-buffer-size-limit=4194304 --mse-video-buffer-size-limit=52428800 --network-quiet-timeout=3 --noerrdialogs --no-sandbox --num-raster-threads=2 --remote-debugging-port=9998 --resource-buffer-max-allocation-size=262144 --resource-buffer-size=1048576 --touch-events=enabled --ui-disable-opaque-shader-program --user-data-dir=/var/lib/wam --webos-wam --skia-font-cache-limit-mb=8 --skia-resource-cache-limit-mb=80 --skia-background-font-cache-size-kb=512 --gpu-program-cache-size-kb=2048 --watchdog-renderer-timeout=200 --local-storage-limit-per-second-level-domain=10 --decoded-image-working-set-budget-mb=96 --mem-pressure-gpu-cache-size-reduction-factor=4 --tile-manager-low-mem-policy-bytes-limit-reduction-factor=2 --shared-mem-minimal-limit-mb=8 --shared-mem-pressure-divider=4 --shared-mem-system-mem-reduction-factor=10 --webos-js-flags
+2673	/usr/sbin/sam 
+2688	/usr/sbin/bootd 
+2710	/usr/sbin/audiofocusmanager 
+2711	/usr/sbin/audiooutputd 
+2712	/usr/sbin/com.webos.service.intent 
+2713	/usr/sbin/MaliitServer -instance 0 
+2714	/usr/sbin/memorymanager 
+2715	/usr/libexec/bluetooth/obexd -r /media/internal -s 
+2717	/usr/sbin/powermgr 
+2726	/usr/sbin/sleepd 
+2750	/usr/sbin/webos-bluetooth-service 
+2755	/usr/bin/pulseaudio --system --resample-method=ffmpeg -nF /etc/pulse/webos-system.pa 
+2768	/system/bin/sh /system/bin/lmkd --boot_completed 
+2771	/system/bin/sleep 2147483647 
+2773	/usr/sbin/com.webos.service.mediacontroller 
+2784	/usr/sbin/wpa_supplicant -u -s 
+2787	/usr/sbin/connmand -n --nobacktrace 
+2788	
+2789	/usr/sbin/event-monitor 
+2790	/usr/sbin/physical-device-manager 
+2796	/usr/sbin/webos-connman-adapter 
+2892	/usr/sbin/appinstalld 
+2898	/usr/sbin/audiod -d 
+2901	/usr/sbin/com.webos.service.mediaindexer 
+2905	/usr/sbin/com.webos.service.mediarecorder 
+2907	/usr/sbin/peripheralmanager 
+2909	/usr/sbin/notificationmgr 
+2911	/usr/sbin/umediaserver --conf /etc/umediaserver/umediaserver_resource_config.txt 
+2912	/usr/sbin/webos-hfp-service 
+2917	/usr/sbin/LunaDownloadMgr 
+2925	hcitool -i hci0 cmd 0x3F 0x01C 0x01 0x02 0x00 0x01 0x01 
+2950	/usr/sbin/g-media-pipeline -scom.webos.pipeline._g8LEM1JJqxBgyt 
+3189	/usr/bin/WebAppMgr --type=zygote --no-zygote-sandbox --disable-in-process-stack-traces --no-sandbox --use-viz-fmp-with-timeout=0 --disable-quic --js-flags 
+3190	/usr/bin/WebAppMgr --type=zygote --disable-in-process-stack-traces --no-sandbox --use-viz-fmp-with-timeout=0 --disable-quic --js-flags 
+3335	/usr/bin/qml-runner --appid org.webosports.app.phone {"appId":"org.webosports.app.phone","main":"file:///usr/palm/applications/org.webosports.app.phone/qml/main.qml","params":{"displayAffinity":0,"launchedAtBoot":true}} 
+3518	/usr/bin/WebAppMgr --type=renderer --use-viz-fmp-with-timeout=0 --disable-quic --v8-snapshot-blob-path --js-flags --disable-in-process-stack-traces --no-sandbox --autoplay-policy=no-user-gesture-required --remote-debugging-port=9998 --skia-font-cache-limit-mb=8 --skia-resource-cache-limit-mb=80 --touch-events=enabled --force-gpu-mem-available-mb=60 --network-quiet-timeout=3 --enable-aggressive-release-policy --mem-pressure-gpu-cache-size-reduction-factor=4 --tile-manager-low-mem-policy-bytes-limit-reduction-factor=2 --enable-watchdog --watchdog-renderer-timeout=200 --decoded-image-working-set-budget-mb=96 --mem-pressure-gpu-cache-size-reduction-factor=4 --tile-manager-low-mem-policy-bytes-limit-reduction-factor=2 --enable-aggressive-release-policy --enable-blink-features=AudioFocusExtension,MediaSourceIsSupportedExtension,MediaTimelineOffset,UMSExtension,LocalResourceCodeCache,CustomEventExtension,WebCodecs,MediaStreamInsertableStreams --disable-blink-features=FontSrcLocalMatching,WebkitBoxLayoutUsesFlexLayout --lang=en-US --num-raster-threads=2 --renderer-client-id=4 --time-ticks-at-unix-epoch=-1792155907881817 --launch-time-ticks=175402274 --shared-files --field-trial-handle=3,i,15509032359174038347,15255650235468377328,262144 --enable-features=MediaControllerService --variations-seed-version --pseudonymization-salt-handle=7,i,1895224621729498602,9356808963561425130,4 --trace-process-track-uuid=3684750470
+3530	/usr/bin/WebAppMgr --type=renderer --use-viz-fmp-with-timeout=0 --disable-quic --v8-snapshot-blob-path --js-flags --disable-in-process-stack-traces --no-sandbox --autoplay-policy=no-user-gesture-required --remote-debugging-port=9998 --skia-font-cache-limit-mb=8 --skia-resource-cache-limit-mb=80 --touch-events=enabled --force-gpu-mem-available-mb=60 --network-quiet-timeout=3 --enable-aggressive-release-policy --mem-pressure-gpu-cache-size-reduction-factor=4 --tile-manager-low-mem-policy-bytes-limit-reduction-factor=2 --enable-watchdog --watchdog-renderer-timeout=200 --decoded-image-working-set-budget-mb=96 --mem-pressure-gpu-cache-size-reduction-factor=4 --tile-manager-low-mem-policy-bytes-limit-reduction-factor=2 --enable-aggressive-release-policy --enable-blink-features=AudioFocusExtension,MediaSourceIsSupportedExtension,MediaTimelineOffset,UMSExtension,LocalResourceCodeCache,CustomEventExtension,WebCodecs,MediaStreamInsertableStreams --disable-blink-features=FontSrcLocalMatching,WebkitBoxLayoutUsesFlexLayout --lang=en-US --num-raster-threads=2 --renderer-client-id=5 --time-ticks-at-unix-epoch=-1792155907881817 --launch-time-ticks=175987799 --shared-files --field-trial-handle=3,i,15509032359174038347,15255650235468377328,262144 --enable-features=MediaControllerService --variations-seed-version --pseudonymization-salt-handle=7,i,1895224621729498602,9356808963561425130,4 --trace-process-track-uuid=2552839629
+3547	/usr/bin/WebAppMgr --type=renderer --use-viz-fmp-with-timeout=0 --disable-quic --v8-snapshot-blob-path --js-flags --disable-in-process-stack-traces --no-sandbox --autoplay-policy=no-user-gesture-required --remote-debugging-port=9998 --skia-font-cache-limit-mb=8 --skia-resource-cache-limit-mb=80 --touch-events=enabled --force-gpu-mem-available-mb=60 --network-quiet-timeout=3 --enable-aggressive-release-policy --mem-pressure-gpu-cache-size-reduction-factor=4 --tile-manager-low-mem-policy-bytes-limit-reduction-factor=2 --enable-watchdog --watchdog-renderer-timeout=200 --decoded-image-working-set-budget-mb=96 --mem-pressure-gpu-cache-size-reduction-factor=4 --tile-manager-low-mem-policy-bytes-limit-reduction-factor=2 --enable-aggressive-release-policy --enable-blink-features=AudioFocusExtension,MediaSourceIsSupportedExtension,MediaTimelineOffset,UMSExtension,LocalResourceCodeCache,CustomEventExtension,WebCodecs,MediaStreamInsertableStreams --disable-blink-features=FontSrcLocalMatching,WebkitBoxLayoutUsesFlexLayout --lang=en-US --num-raster-threads=2 --renderer-client-id=6 --time-ticks-at-unix-epoch=-1792155907881817 --launch-time-ticks=179906087 --shared-files --field-trial-handle=3,i,15509032359174038347,15255650235468377328,262144 --enable-features=MediaControllerService --variations-seed-version --pseudonymization-salt-handle=7,i,1895224621729498602,9356808963561425130,4 --trace-process-track-uuid=1420928787
+3553	/usr/bin/WebAppMgr --type=renderer --use-viz-fmp-with-timeout=0 --disable-quic --v8-snapshot-blob-path --js-flags --disable-in-process-stack-traces --no-sandbox --autoplay-policy=no-user-gesture-required --remote-debugging-port=9998 --skia-font-cache-limit-mb=8 --skia-resource-cache-limit-mb=80 --touch-events=enabled --force-gpu-mem-available-mb=60 --network-quiet-timeout=3 --enable-aggressive-release-policy --mem-pressure-gpu-cache-size-reduction-factor=4 --tile-manager-low-mem-policy-bytes-limit-reduction-factor=2 --enable-watchdog --watchdog-renderer-timeout=200 --decoded-image-working-set-budget-mb=96 --mem-pressure-gpu-cache-size-reduction-factor=4 --tile-manager-low-mem-policy-bytes-limit-reduction-factor=2 --enable-aggressive-release-policy --enable-blink-features=AudioFocusExtension,MediaSourceIsSupportedExtension,MediaTimelineOffset,UMSExtension,LocalResourceCodeCache,CustomEventExtension,WebCodecs,MediaStreamInsertableStreams --disable-blink-features=FontSrcLocalMatching,WebkitBoxLayoutUsesFlexLayout --lang=en-US --num-raster-threads=2 --renderer-client-id=7 --time-ticks-at-unix-epoch=-1792155907881817 --launch-time-ticks=180270456 --shared-files --field-trial-handle=3,i,15509032359174038347,15255650235468377328,262144 --enable-features=MediaControllerService --variations-seed-version --pseudonymization-salt-handle=7,i,1895224621729498602,9356808963561425130,4 --trace-process-track-uuid=289017946
+3559	/usr/bin/WebAppMgr --type=renderer --use-viz-fmp-with-timeout=0 --disable-quic --v8-snapshot-blob-path --js-flags --disable-in-process-stack-traces --no-sandbox --autoplay-policy=no-user-gesture-required --remote-debugging-port=9998 --skia-font-cache-limit-mb=8 --skia-resource-cache-limit-mb=80 --touch-events=enabled --force-gpu-mem-available-mb=60 --network-quiet-timeout=3 --enable-aggressive-release-policy --mem-pressure-gpu-cache-size-reduction-factor=4 --tile-manager-low-mem-policy-bytes-limit-reduction-factor=2 --enable-watchdog --watchdog-renderer-timeout=200 --decoded-image-working-set-budget-mb=96 --mem-pressure-gpu-cache-size-reduction-factor=4 --tile-manager-low-mem-policy-bytes-limit-reduction-factor=2 --enable-aggressive-release-policy --enable-blink-features=AudioFocusExtension,MediaSourceIsSupportedExtension,MediaTimelineOffset,UMSExtension,LocalResourceCodeCache,CustomEventExtension,WebCodecs,MediaStreamInsertableStreams --disable-blink-features=FontSrcLocalMatching,WebkitBoxLayoutUsesFlexLayout --lang=en-US --num-raster-threads=2 --renderer-client-id=8 --time-ticks-at-unix-epoch=-1792155907881817 --launch-time-ticks=180554079 --shared-files --field-trial-handle=3,i,15509032359174038347,15255650235468377328,262144 --enable-features=MediaControllerService --variations-seed-version --pseudonymization-salt-handle=7,i,1895224621729498602,9356808963561425130,4 --trace-process-track-uuid=3452074400
+3565	/usr/bin/WebAppMgr --type=renderer --use-viz-fmp-with-timeout=0 --disable-quic --v8-snapshot-blob-path --js-flags --disable-in-process-stack-traces --no-sandbox --autoplay-policy=no-user-gesture-required --remote-debugging-port=9998 --skia-font-cache-limit-mb=8 --skia-resource-cache-limit-mb=80 --touch-events=enabled --force-gpu-mem-available-mb=60 --network-quiet-timeout=3 --enable-aggressive-release-policy --mem-pressure-gpu-cache-size-reduction-factor=4 --tile-manager-low-mem-policy-bytes-limit-reduction-factor=2 --enable-watchdog --watchdog-renderer-timeout=200 --decoded-image-working-set-budget-mb=96 --mem-pressure-gpu-cache-size-reduction-factor=4 --tile-manager-low-mem-policy-bytes-limit-reduction-factor=2 --enable-aggressive-release-policy --enable-blink-features=AudioFocusExtension,MediaSourceIsSupportedExtension,MediaTimelineOffset,UMSExtension,LocalResourceCodeCache,CustomEventExtension,WebCodecs,MediaStreamInsertableStreams --disable-blink-features=FontSrcLocalMatching,WebkitBoxLayoutUsesFlexLayout --lang=en-US --num-raster-threads=2 --renderer-client-id=9 --time-ticks-at-unix-epoch=-1792155907881817 --launch-time-ticks=182443736 --shared-files --field-trial-handle=3,i,15509032359174038347,15255650235468377328,262144 --enable-features=MediaControllerService --variations-seed-version --pseudonymization-salt-handle=7,i,1895224621729498602,9356808963561425130,4 --trace-process-track-uuid=2320163559
+5300	media.codec hw/android.hardware.media.omx@1.0-service 
+7806	
+9262	
+11316	/usr/sbin/pacrunner 
+11342	
+14028	
+17642	
+18023	
+18298	
+18333	
+18680	
+19164	systemd-userwork: waiting...                       
+19526	systemd-userwork: waiting...                       
+19697	systemd-userwork: waiting...                       
+19892	/bin/sh -c rm -rf /tmp/smcap; mkdir -p /tmp/smcap; cd /tmp/smcap;
+cat /proc/stat > stat1; sleep 2; cat /proc/stat > stat2;
+cat /proc/net/dev > netdev1; sleep 2; cat /proc/net/dev > netdev2;
+for f in meminfo loadavg uptime mounts cpuinfo version; do cat /proc/$f > $f; done
+: > cpufreq
+for c in /sys/devices/system/cpu/cpu[0-9]*; do n=${c##*/}; echo "$n $(cat $c/online 2>/dev/null) $(cat $c/cpufreq/scaling_cur_freq 2>/dev/null) $(cat $c/cpufreq/cpuinfo_max_freq 2>/dev/null) $(cat $c/cpufreq/cpuinfo_min_freq 2>/dev/null)" >> cpufreq; done
+cat /sys/devices/system/cpu/online > cpu-online 2>/dev/null
+cat /sys/devices/system/cpu/present > cpu-present 2>/dev/null
+: > thermal
+for t in /sys/class/thermal/thermal_zone*; do echo "${t##*/} $(cat $t/type 2>/dev/null) $(cat $t/temp 2>/dev/null)" >> thermal; done
+: > power
+for p in /sys/class/power_supply/*; do echo "== ${p##*/}" >> power; cat $p/uevent >> power 2>/dev/null; done
+df > df 2>&1
+mkdir -p pid
+for p in 1 2 $(ls /proc | grep -E "^[0-9]+$"); do [ -d /proc/$p ] || continue; mkdir -p pid/$p; cat /proc/$p/stat > pid/$p/stat 2>/dev/null; cat /proc/$p/status > pid/$p/status 2>/dev/null; tr "\0" " " < /proc/$p/cmdline > pid/$p/cmdline 2>/dev/null; cat /proc/$p/statm > pid/$p/statm 2>/dev/null; done
+getconf PAGESIZE > pagesize 2>/dev/null; getconf CLK_TCK > clktck 2>/dev/null
+luna-send -n 1 -w 5000 -f luna://com.webos.service.applicationmanager/running "{}" > sam-running.json 2>&1
+luna-send -n 1 -w 5000 -f luna://com.webos.service.memorymanager/getMemoryStatus "{}" > memstatus.json 2>&1
+luna-send -n 1 -w 5000 -f luna://com.webos.service.battery/batteryStatusQuery "{}" > battery.json 2>&1
+luna-send -n 1 -w 5000 -f luna://com.webos.service.battery/chargerStatusQuery "{}" > charger.json 2>&1
+cd /tmp; tar czf smcap.tgz smcap 
+23778	
+32545	
+32698	

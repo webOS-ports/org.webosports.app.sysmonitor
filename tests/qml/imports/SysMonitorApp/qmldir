@@ -1,0 +1,3 @@
+module SysMonitorApp
+ProcReader 1.0 ProcReader.qml
+ProcessModel 1.0 ProcessModel.qml

@@ -1,0 +1,2 @@
+module SysMonitorApp
+plugin sysmonitor-qml

@@ -1,0 +1,4 @@
+{
+    "org.webosports.app.sysmonitor": [ "application.launcher", "memorymanager.query", "batteryd.management" ],
+    "org.webosports.app.sysmonitor-*": [ "application.launcher", "memorymanager.query", "batteryd.management" ]
+}

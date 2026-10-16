@@ -1,0 +1,97 @@
+#!/bin/sh
+# Copyright (c) 2026 Herman van Hazendonk <github.com@herrie.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain a
+# copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+#
+# static-analysis.sh - static-analysis gate for the app's own C++
+# (SysMonitorApp/*.cpp), as Camera's and Sound Recorder's:
+#
+#   gcc -fanalyzer    at -O0 and -O2
+#   clang analyzer    with the alpha checkers for unix, security and core
+#   clang-tidy        clang-analyzer-*, bugprone-*, cert-*, concurrency-*,
+#                     performance-*
+#   cppcheck          all checks, exhaustive, inconclusive included
+#   flawfinder        level 1 and up
+#
+#   Coccinelle        its stock C++ semantic patches, where it gets through
+#
+# sparse parses C only, so it is not run.
+#
+# Needs a sysroot with Qt 6 headers (a recipe sysroot, or the one from
+# tests/host-sysroot.sh):
+#   APP_SYSROOT=<sysroot> tests/static-analysis.sh
+set -u
+
+DIR=$(cd "$(dirname "$0")/../SysMonitorApp" && pwd)
+SYSROOT=${APP_SYSROOT:?set APP_SYSROOT to a recipe-sysroot}
+U=$SYSROOT/usr/include
+CXXV=$(ls "$U/c++" | head -1)
+TRIPLE=$(ls "$U/c++/$CXXV" | grep -- -linux | head -1)
+
+FLAGS="-std=c++17 -fPIC -nostdinc++ -isystem $U/c++/$CXXV -isystem $U/c++/$CXXV/$TRIPLE --sysroot=$SYSROOT
+ -isystem $U -isystem $U/QtCore -isystem $U/QtQml -I$DIR"
+SOURCES="procfs.cpp procreader.cpp processmodel.cpp plugin.cpp"
+HEADERS="procfs.h procreader.h processmodel.h plugin.h"
+OURS='(procfs|procreader|processmodel|plugin)[.](cpp|h)'
+fail=0
+
+report() {
+	hits=$(printf '%s\n' "$2" | grep -E "$OURS" | grep -Ei 'warning|error|style|portability|performance|hit' || true)
+	if [ -n "$hits" ]; then
+		echo "== $1: FINDINGS"; printf '%s\n' "$hits"; fail=1
+	else
+		echo "== $1: clean"
+	fi
+}
+have() { command -v "$1" >/dev/null 2>&1 || { echo "== $1: not installed, skipped"; return 1; }; }
+
+cd "$DIR"
+if have g++; then
+	for opt in -O0 -O2; do
+		out=""
+		for f in $SOURCES; do
+			out="$out$(g++ $opt -fanalyzer -fsyntax-only -Wall -Wextra $FLAGS "$f" 2>&1)
+"
+		done
+		report "gcc -fanalyzer $opt" "$out"
+	done
+fi
+if have clang++; then
+	out=""
+	for f in $SOURCES; do
+		out="$out$(clang++ --analyze -Xclang -analyzer-checker=core,unix,security,alpha.core,alpha.unix,alpha.security,cplusplus \
+			$FLAGS "$f" -o /dev/null 2>&1)
+"
+	done
+	report "clang --analyze" "$out"
+fi
+if have clang-tidy; then
+	out=$(clang-tidy -quiet --checks='-*,clang-analyzer-*,bugprone-*,cert-*,concurrency-*,performance-*,-bugprone-easily-swappable-parameters,-cert-err58-cpp' \
+		$SOURCES -- $FLAGS 2>&1)
+	report clang-tidy "$out"
+fi
+if have cppcheck; then
+	out=$(cppcheck --enable=all --check-level=exhaustive --inconclusive --std=c++17 --quiet \
+		--suppress=missingIncludeSystem --suppress=unusedFunction --suppress=checkersReport \
+		-DQ_OBJECT= -DQ_SIGNALS=public '-DQ_ENUM(x)=' -DQ_EMIT= -DQ_INVOKABLE= '-DQ_PROPERTY(x)=' '-DQ_PLUGIN_METADATA(x)=' $SOURCES 2>&1)
+	report cppcheck "$out"
+fi
+if have flawfinder; then
+	# Its hits read "file.cpp:12:3:  [2] (misc) open:", without any of the
+	# words report() looks for; each is a finding. A line it should not
+	# count says why and carries "Flawfinder: ignore".
+	out=$(flawfinder --minlevel=1 --columns --quiet --dataonly $SOURCES $HEADERS 2>&1 | grep -E '^[a-z]+[.](cpp|h):[0-9]+:[0-9]+: +\[[0-9]\]' | sed 's/$/ hit/')
+	report flawfinder "$out"
+fi
+if have spatch; then
+	out=""
+	for f in $SOURCES; do
+		# A null check after a dereference, and a free/delete pair.
+		out="$out$(spatch --very-quiet --c++=17 --sp-file "$(dirname "$0")/cocci/deref-then-check.cocci" "$f" 2>&1)
+"
+	done
+	report coccinelle "$out"
+fi
+exit $fail
