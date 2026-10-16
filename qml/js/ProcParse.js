@@ -364,10 +364,12 @@ function thermalZones(names) {
 }
 
 /*
- * batteryd's batteryStatusQuery reply, or a power_supply uevent file as
- * the stand-in when the bus will not answer, as
- *   { percent, charging, current_mA, voltage_mV, temperature_C, health }
- * with -1 / "" where not known. Returns null if there is no battery.
+ * batteryd's batteryStatusQuery reply as
+ *   { percent, status, current_mA, voltage_mV, temperature_C, health }
+ * with -1 / "" where not known, or null if there is no battery. status is
+ * left "": batteryd does not say, and the sign of its current is not the
+ * same on every device (the mindphone and the Q25 gave a negative current
+ * while charging), so it comes from the kernel (batteryStatus()).
  */
 function batteryFromStatus(reply) {
     if (!reply || reply.returnValue === false || reply.percent === undefined)
@@ -375,8 +377,7 @@ function batteryFromStatus(reply) {
     var current = Number(reply.current_mA);
     return {
         percent: Number(reply.percent_ui !== undefined ? reply.percent_ui : reply.percent),
-        // batteryd's sign: positive into the battery.
-        charging: current > 0,
+        status: "",
         current_mA: isNaN(current) ? -1 : current,
         voltage_mV: reply.voltage_mV !== undefined ? Number(reply.voltage_mV) : -1,
         temperature_C: reply.temperature_C !== undefined ? Number(reply.temperature_C) : -1,
@@ -384,7 +385,7 @@ function batteryFromStatus(reply) {
     };
 }
 
-function batteryFromUevent(text) {
+function _uevent(text) {
     var v = {};
     var lines = _lines(text);
     for (var i = 0; i < lines.length; i++) {
@@ -392,12 +393,24 @@ function batteryFromUevent(text) {
         if (eq > 0)
             v[lines[i].substring(0, eq)] = lines[i].substring(eq + 1);
     }
+    return v;
+}
+
+// The kernel's word for the battery (power_supply's uevent): "Charging",
+// "Discharging", "Full", "Not charging", or "" when it does not say.
+function batteryStatus(text) {
+    return _uevent(text).POWER_SUPPLY_STATUS || "";
+}
+
+// The same as batteryFromStatus() from the kernel alone, for when the bus
+// does not answer.
+function batteryFromUevent(text) {
+    var v = _uevent(text);
     if (v.POWER_SUPPLY_CAPACITY === undefined)
         return null;
-    var status = v.POWER_SUPPLY_STATUS || "";
     return {
         percent: Number(v.POWER_SUPPLY_CAPACITY),
-        charging: status === "Charging",
+        status: v.POWER_SUPPLY_STATUS || "",
         current_mA: -1,
         voltage_mV: v.POWER_SUPPLY_VOLTAGE_NOW !== undefined ? Math.round(Number(v.POWER_SUPPLY_VOLTAGE_NOW) / 1000) : -1,
         // Tenths of a degree.

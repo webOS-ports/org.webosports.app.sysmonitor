@@ -149,10 +149,17 @@ TestCase {
         // /var is the same file system as / on the TouchPad: shown once.
         compare(app.sampler.storage.map(function(s) { return s.path; }), ["/", "/media/internal"]);
         compare(textOf("batteryLevel"), "100%");
+        // batteryd's figures, the kernel's word for the state.
+        compare(textOf("batteryStatus"), "Full");
         verify(findChild(page(), "batteryPanel").visible);
         // Its only thermal zone reads nothing: no temperatures panel.
         verify(!findChild(page(), "thermalPanel").visible);
         compare(app.sampler.cpuHistory.length, 1);
+        // A small graph per core, with that core's readings.
+        compare(app.sampler.coreHistories.length, 2);
+        var graph = findChild(findChild(page(), "coreGrid").children[0], "coreGraph");
+        verify(graph && graph.height > 0);
+        compare(graph.series[0].values, app.sampler.coreHistories[0]);
     }
 
     function test_overview_mindphone() {
@@ -166,6 +173,25 @@ TestCase {
         verify(app.sampler.thermal.length > 0 && app.sampler.thermal.length < 28, app.sampler.thermal.length);
         verify(app.sampler.thermal.every(function(t) { return t.celsius > 0 && t.celsius < 100; }));
         compare(app.sampler.network.interfaces.map(function(i) { return i.name; }), ["wlan0"]);
+    }
+
+    // A core whose load is not known yet is not "off": only one with no
+    // figures at all is.
+    function test_core_off_only_without_figures() {
+        createApp("touchpad");
+        app.appActive = true;
+        var core = findChild(page(), "coreGrid").children[0];
+        verify(String(findChild(core, "coreValue").value).indexOf("off") < 0, findChild(core, "coreValue").value);
+        app.proc.overrides["/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq"] = "";
+        app.proc.overrides["/proc/stat"] = "cpu  1 0 1 10 0 0 0 0 0 0\ncpu0 1 0 1 10 0 0 0 0\n";
+        app.sampler.poll();
+        app.proc.overrides["/proc/stat"] = "cpu  2 0 2 20 0 0 0 0 0 0\ncpu0 2 0 2 20 0 0 0 0\n";
+        app.sampler.poll();
+        compare(app.sampler.cpuCores[1], -1);
+        tryVerify(function() {
+            var c1 = findChild(page(), "coreGrid").children[1];
+            return c1 && findChild(c1, "coreValue") && findChild(c1, "coreValue").value === "off";
+        });
     }
 
     function test_overview_q25_eight_cores() {
@@ -403,7 +429,7 @@ TestCase {
         app.sampler.bus.replies["luna://com.webos.service.memorymanager/getMemoryStatus"] = { error: "Denied method call" };
         startReading();
         // The power_supply uevent: charging, 26.4 °C.
-        compare(app.sampler.battery.charging, true);
+        compare(app.sampler.battery.status, "Charging");
         compare(app.sampler.battery.temperature_C, 26.4);
         compare(textOf("memoryLevel"), "–");
     }

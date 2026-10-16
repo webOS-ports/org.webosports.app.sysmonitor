@@ -161,13 +161,15 @@ Item {
         var usage = ProcParse.cpuUsage(_prevCpu, cpuNow);
         _prevCpu = cpuNow;
         cpuTotal = usage.total;
-        cpuCores = usage.cores;
+        // One per cpuN directory: a core switched off has no line in
+        // /proc/stat but is still there.
+        cpuCores = _cpus.map(function(c) { return usage.cores[c] !== undefined ? usage.cores[c] : -1; });
         cpuFrequencies = texts.slice(fixed.length).map(ProcParse.parseFrequency);
         if (usage.total >= 0) {
             cpuHistory = ProcParse.pushHistory(cpuHistory, usage.total, historyLength);
             var histories = [];
-            for (var i = 0; i < usage.cores.length; i++)
-                histories.push(ProcParse.pushHistory(coreHistories[i] || [], Math.max(0, usage.cores[i]), historyLength));
+            for (var i = 0; i < cpuCores.length; i++)
+                histories.push(ProcParse.pushHistory(coreHistories[i] || [], Math.max(0, cpuCores[i]), historyLength));
             coreHistories = histories;
         }
 
@@ -227,8 +229,9 @@ Item {
     }
 
     /*
-     * batteryd's figures; if the bus will not give them (no batteryd, or
-     * the call refused), the kernel's power_supply/battery instead.
+     * batteryd's figures and the kernel's word for charging or not; if the
+     * bus will not give them (no batteryd, or the call refused), the
+     * kernel's power_supply/battery alone.
      */
     function askBattery() {
         if (!bus) {
@@ -238,16 +241,20 @@ Item {
         bus.call("luna://com.webos.service.battery/batteryStatusQuery", "{}",
                  function(message) {
                      var b = ProcParse.batteryFromStatus(JSON.parse(message.payload));
-                     if (b)
+                     if (b) {
+                         b.status = ProcParse.batteryStatus(sampler.reader.readFile(sampler.batteryUevent));
                          sampler.battery = b;
-                     else
+                     } else {
                          sampler.batteryFromSysfs();
+                     }
                  },
                  function() { sampler.batteryFromSysfs(); });
     }
 
+    readonly property string batteryUevent: "/sys/class/power_supply/battery/uevent"
+
     function batteryFromSysfs() {
-        battery = ProcParse.batteryFromUevent(reader.readFile("/sys/class/power_supply/battery/uevent"));
+        battery = ProcParse.batteryFromUevent(reader.readFile(batteryUevent));
     }
 
     // SAM tells about apps starting and closing as they do.

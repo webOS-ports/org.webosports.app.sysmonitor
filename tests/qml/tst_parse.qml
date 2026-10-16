@@ -220,13 +220,19 @@ TestCase {
         var b = ProcParse.batteryFromStatus(JSON.parse(fixture("mindphone", "battery.json")));
         compare(b.percent, 100);
         compare(b.current_mA, -206);
-        compare(b.charging, false);
+        compare(b.status, "");
         compare(b.voltage_mV, 4221);
         compare(b.temperature_C, 26);
         compare(ProcParse.batteryFromStatus({ returnValue: false, errorText: "Denied" }), null);
         var u = ProcParse.batteryFromUevent(fixture("mindphone", "battery-uevent"));
         compare(u.percent, 100);
-        compare(u.charging, true);
+        compare(u.status, "Charging");
+        // The kernel's word: the mindphone and the Q25 charging, the
+        // TouchPad full.
+        compare(ProcParse.batteryStatus(fixture("mindphone", "battery-uevent")), "Charging");
+        compare(ProcParse.batteryStatus(fixture("q25", "battery-uevent")), "Charging");
+        compare(ProcParse.batteryStatus(fixture("touchpad", "battery-uevent")), "Full");
+        compare(ProcParse.batteryStatus(""), "");
         compare(u.voltage_mV, 4221);
         compare(u.temperature_C, 26.4);
         compare(ProcParse.batteryFromUevent(""), null);

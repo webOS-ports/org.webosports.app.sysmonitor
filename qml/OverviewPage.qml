@@ -102,7 +102,8 @@ AppPage {
                         id: coreGrid
                         objectName: "coreGrid"
                         width: parent.width
-                        columns: width >= Units.gu(60) ? 4 : 2
+                        // Four across only where each still fits its load and clock.
+                        columns: width >= Units.gu(110) ? 4 : 2
                         columnSpacing: Units.gu(1)
                         rowSpacing: Units.gu(0.5)
 
@@ -115,13 +116,18 @@ AppPage {
                                 width: (coreGrid.width - coreGrid.columnSpacing * (coreGrid.columns - 1)) / coreGrid.columns
                                 spacing: Units.gu(0.25)
                                 StatRow {
+                                    objectName: "coreValue"
                                     label: "Core " + index
-                                    value: (load >= 0 ? Format.percent(load) : "off")
-                                           + (mhz > 0 ? " · " + Format.frequency(mhz) : "")
+                                    // Off: no figures at all (a core switched off has
+                                    // no line in /proc/stat and no clock).
+                                    value: load < 0 && mhz <= 0 ? "off"
+                                           : Format.percent(load) + (mhz > 0 ? " · " + Format.frequency(mhz) : "")
                                 }
-                                UsageBar {
-                                    height: Units.gu(0.6)
-                                    fraction: load >= 0 ? load / 100 : 0
+                                HistoryGraph {
+                                    objectName: "coreGraph"
+                                    implicitHeight: Units.gu(3)
+                                    capacity: page.sampler.historyLength
+                                    series: [{ values: page.sampler.coreHistories[index] || [], color: "#2f7fc8" }]
                                 }
                             }
                         }
@@ -261,13 +267,19 @@ AppPage {
 
                     StatRow {
                         objectName: "batteryLevel"
-                        label: page.sampler.battery && page.sampler.battery.charging ? "Charging" : "Charge"
+                        label: "Charge"
                         value: page.sampler.battery ? Math.round(page.sampler.battery.percent) + "%" : "–"
                     }
                     UsageBar {
                         objectName: "batteryBar"
                         lowIsBad: true
                         fraction: page.sampler.battery ? page.sampler.battery.percent / 100 : 0
+                    }
+                    StatRow {
+                        objectName: "batteryStatus"
+                        visible: !!page.sampler.battery && page.sampler.battery.status !== ""
+                        label: "State"
+                        value: page.sampler.battery ? page.sampler.battery.status : ""
                     }
                     StatRow {
                         visible: !!page.sampler.battery && page.sampler.battery.current_mA !== -1

@@ -46,7 +46,8 @@ AppPage {
 
     readonly property var sampler: appWindow.sampler
     readonly property var prefs: appWindow.prefs
-    readonly property bool wide: width >= Units.gu(60)
+    // Search and sorting side by side where both have room.
+    readonly property bool wide: width >= Units.gu(100)
     property alias processes: processes
     property alias processDialog: processDialog
 
