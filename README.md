@@ -3,9 +3,11 @@ System Monitor
 
 Summary
 -------
-What the device is doing: CPU, memory, network, storage, battery and
-temperatures at a glance, and the processes behind it, with a way to close
-an app or end a process.
+CPU, memory, network, storage, battery and temperatures at a glance, and the processes, with a way to close an app or end a process.
+
+Description
+-----------
+What the device is doing, and the processes behind it.
 
 A QML app for LuneOS in the LuneOS style (LuneOS.Forms), with a small C++
 plugin (`SysMonitorApp`) for what QML cannot do or cannot do cheaply.
