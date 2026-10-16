@@ -62,22 +62,26 @@ behind another app or the lock screen - so it costs nothing there. The
 processes are only read while their list is shown, and the overview's
 figures are not worked out meanwhile.
 
-Measured on the HP TouchPad (armv7, two cores, Linux 3.4, 326 processes)
-with `tools/measure.sh`: the app's own CPU time over 60 seconds, reading
-every 2 seconds. The screen was locked, so the readings were kept going with
-`{"measure": true}` and nothing was drawn: this is the cost of reading and
-working out the figures, not of drawing them.
+Measured with `tools/measure.sh` on 2026-10-16: the app's own CPU time over
+60 seconds, reading every 2 seconds unless said otherwise. The screens were
+locked, so the readings were kept going with `{"measure": true}` and nothing
+was drawn: this is the cost of reading and working out the figures, not of
+drawing them. Shares of one core; two runs where two figures are given.
 
-| Page | App's CPU time |
-|---|---|
-| Overview | 0.6 % of one core (0.3 % of the device) |
-| Processes | 3.9 % of one core (1.9 % of the device) |
-| In the background | 0 (no CPU time at all in 60 seconds) |
+| Page | HP TouchPad (armv7, 2 cores, ~325 processes) | mindphone (armv7, 4 cores, ~580 processes) |
+|---|---|---|
+| Overview | 1.2 %, 1.2 % | 1.2 % |
+| Processes | 4.6 %, 4.9 % | 2.3 % |
+| Processes, every 5 seconds | 3.0 % | not measured |
+| In the background (not measuring) | 0.02 % (1 tick in 60 s) | not measured |
 
 The processes were first worked out in QML's JavaScript, which cost the
 TouchPad 12 % of a core; reading and sorting them in C++ (`ProcessModel`),
 telling the list only about the rows that changed, and not working out the
-hidden overview brought that down to the figure above.
+hidden overview brought that down to the figures above. Most of what is
+left is the kernel answering a few hundred `/proc/<pid>/stat` reads
+(20-50 ms per reading on the TouchPad) and the list laying out the rows
+that changed.
 
 How it works
 ------------
