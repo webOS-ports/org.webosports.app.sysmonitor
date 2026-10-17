@@ -15,22 +15,19 @@
  */
 
 .pragma library
+.import LuneOS.Components 1.0 as LC
 
 /*
  * Numbers as the app shows them. Sizes are binary (1 KB = 1024 bytes), as
- * the kernel counts them.
+ * the kernel counts them, written as the other apps write them
+ * (LuneOS.Components' FileLists).
  */
 
+// With a decimal up to 100, where a size changing from one reading to the
+// next shows; "–" when not known.
 function bytes(n) {
-    if (!(n >= 0))
-        return "–";
-    var units = ["B", "KB", "MB", "GB", "TB"];
-    var i = 0;
-    while (n >= 1024 && i < units.length - 1) {
-        n /= 1024;
-        i++;
-    }
-    return (i === 0 || n >= 100 ? Math.round(n) : n.toFixed(1)) + " " + units[i];
+    var text = LC.FileLists.formatSize(n, 100);
+    return text !== "" ? text : "–";
 }
 
 function rate(bytesPerSecond) {
