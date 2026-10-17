@@ -176,6 +176,15 @@ Tests
 
 See `tests/README.md` for the details.
 
+Icon
+----
+`images/icon.svg` is the icon: a CPU chip standing on the platform of the
+legacy Settings and Update icons. `tools/make-icon.sh <svgcheck>` renders
+`icon.png` and `icon-256x256.png` from it with Qt, as the launcher draws
+it. `tools/icon/make-variants.py` draws the designs kept into
+`tools/icon/variants/`: the chip (5) and a gauge (2). The SVGs use no
+filters, which Qt's renderer lacks.
+
 License
 -------
 GNU General Public License version 3 (GPL-3.0-only), see LICENSE.
