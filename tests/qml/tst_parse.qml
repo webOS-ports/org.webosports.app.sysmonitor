@@ -257,8 +257,10 @@ TestCase {
         compare(Format.bytes(1536), "1.5 KB");
         compare(Format.bytes(864444416), "824 MB");
         compare(Format.bytes(12344107008), "11.5 GB");
+        compare(Format.bytes(2.4 * 1024 * 1024 * 1024), "2.4 GB");
         compare(Format.bytes(-1), "–");
-        compare(Format.rate(2048), "2.0 KB/s");
+        compare(Format.rate(2048), "2 KB/s");
+        compare(Format.bytes(1023.97 * 1024 * 1024), "1 GB", "rounds up into the next unit");
         compare(Format.percent(-1), "–");
         compare(Format.percent(3.3113), "3.3%");
         compare(Format.percent(42.6), "43%");

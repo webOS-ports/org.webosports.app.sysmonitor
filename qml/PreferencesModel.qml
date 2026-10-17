@@ -15,15 +15,14 @@
  */
 
 import QtCore
+import LuneOS.Components 1.0
 
 /*
  * The app's preferences, kept between runs.
  */
 Settings {
-    // Not a QSettings organisation/application pair: the QML runner is
-    // shared by every QML app, so the file is named explicitly.
-    location: StandardPaths.writableLocation(StandardPaths.GenericConfigLocation)
-              + "/org.webosports.app.sysmonitor/preferences.ini"
+    // In the app's own file, as every QML app has (LuneOS.Components' AppFiles).
+    location: AppFiles.preferencesFile("org.webosports.app.sysmonitor")
     category: "monitor"
 
     // Seconds between readings.
