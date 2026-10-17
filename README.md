@@ -178,4 +178,4 @@ See `tests/README.md` for the details.
 
 License
 -------
-Apache License 2.0, see LICENSE.
+GNU General Public License version 3 (GPL-3.0-only), see LICENSE.

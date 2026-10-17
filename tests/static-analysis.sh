@@ -1,9 +1,17 @@
 #!/bin/sh
 # Copyright (c) 2026 Herman van Hazendonk <github.com@herrie.org>
 #
-# Licensed under the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License. You may obtain a
-# copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+# This program is free software: you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 3, as published
+# by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranties of
+# MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
+# PURPOSE.  See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # static-analysis.sh - static-analysis gate for the app's own C++
 # (SysMonitorApp/*.cpp), as Camera's and Sound Recorder's:
