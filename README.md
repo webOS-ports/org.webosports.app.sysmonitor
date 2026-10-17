@@ -12,6 +12,54 @@ What the device is doing, and the processes behind it.
 A QML app for LuneOS in the LuneOS style (LuneOS.Forms), with a small C++
 plugin (`SysMonitorApp`) for what QML cannot do or cannot do cheaply.
 
+Screenshots
+-----------
+
+**HP TouchPad (1024×768)**:
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/screenshots/touchpad-overview.png" height="200" alt="Overview"></td>
+    <td align="center"><img src="docs/screenshots/touchpad-processes.png" height="200" alt="Processes"></td>
+    <td align="center"><img src="docs/screenshots/touchpad-preferences.png" height="200" alt="Preferences"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Overview</sub></td>
+    <td align="center"><sub>Processes</sub></td>
+    <td align="center"><sub>Preferences</sub></td>
+  </tr>
+</table>
+
+**mindphone (480×800)**:
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/screenshots/mindphone-overview.png" height="300" alt="Overview"></td>
+    <td align="center"><img src="docs/screenshots/mindphone-processes.png" height="300" alt="Processes"></td>
+    <td align="center"><img src="docs/screenshots/mindphone-preferences.png" height="300" alt="Preferences"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Overview</sub></td>
+    <td align="center"><sub>Processes</sub></td>
+    <td align="center"><sub>Preferences</sub></td>
+  </tr>
+</table>
+
+**Q25 (720×720)**:
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/screenshots/q25-overview.png" height="240" alt="Overview"></td>
+    <td align="center"><img src="docs/screenshots/q25-processes.png" height="240" alt="Processes"></td>
+    <td align="center"><img src="docs/screenshots/q25-preferences.png" height="240" alt="Preferences"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Overview</sub></td>
+    <td align="center"><sub>Processes</sub></td>
+    <td align="center"><sub>Preferences</sub></td>
+  </tr>
+</table>
+
 Features
 --------
 
