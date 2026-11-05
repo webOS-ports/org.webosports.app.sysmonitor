@@ -190,14 +190,14 @@ TestCase {
         }
         compare(d.refusal, "");
         tryCompare(d, "opened", true);
+        // Its rows are placed as it is drawn: the buttons' places are known
+        // from its first frame on, as a user sees them.
+        waitForRendering(app.contentItem);
         return d;
     }
 
-    // Every button the dialog shows, whole and in the window. The details
-    // are taller than the Q25's 720 pixels at its grid unit: the last
-    // buttons run off the bottom of the screen.
-    // Marked as expected there, so the day they fit this says so.
-    function buttonsFit(d, label, tooTallOnQ25) {
+    // Every button the dialog shows, whole and in the window.
+    function buttonsFit(d, label) {
         var names = ["closeAppButton", "endButton", "killButton", "confirmButton", "cancelButton"];
         var off = [];
         for (var i = 0; i < names.length; i++) {
@@ -209,17 +209,47 @@ TestCase {
             if (p.x < -0.5 || p.y < -0.5 || p.x + b.width > app.width + 0.5 || p.y + b.height > app.height + 0.5)
                 off.push(names[i] + " at " + Math.round(p.x) + "," + Math.round(p.y) + " " + b.width + "x" + b.height);
         }
-        if (tooTallOnQ25 && profile === "q25")
-            expectFailContinue("", "the details are taller than the Q25's screen");
         verify(off.length === 0, label + ": off the window: " + off.join("; "));
+    }
+
+    // The details are taller than the Q25's 720 pixels at its grid unit:
+    // they scroll there. Each shown row under the one before it, and the
+    // last (the command line, where the process has one) in reach.
+    function detailsReachable(d, label) {
+        var view = findChild(d.contentItem, "detailsView");
+        onScreen(view, label + ": the details");
+        verify(view.height >= Units.gu(10), label + ": no room for the details: " + view.height);
+        var kids = view.contentItem.children[0].children;
+        var last = null;
+        for (var i = 0; i < kids.length; i++) {
+            if (!kids[i].visible)
+                continue;
+            if (last)
+                verify(kids[i].y >= last.y + last.height - 0.5,
+                       label + ": row " + i + " over the one before: " + kids[i].y + ", that one to " + (last.y + last.height));
+            last = kids[i];
+        }
+        verify(last, label + ": no details shown");
+        verify(last.y + last.height <= view.contentHeight + 0.5,
+               label + ": the last row past the details' end: " + (last.y + last.height) + " of " + view.contentHeight);
+        view.contentY = Math.max(0, view.contentHeight - view.height);
+        waitForRendering(app.contentItem);
+        var top = view.mapToItem(null, 0, 0).y;
+        var p = last.mapToItem(null, 0, 0).y;
+        verify(p >= top - 0.5 && p + last.height <= top + view.height + 0.5,
+               label + ": the last row out of reach: " + p + "+" + last.height + ", the details " + top + "+" + view.height);
+        view.contentY = 0;
+        waitForRendering(app.contentItem);
     }
 
     function dialogFits(d, label) {
         var p = d.contentItem.mapToItem(null, 0, 0);
         verify(p.x >= -0.5 && p.x + d.contentItem.width <= app.width + 0.5, label + " off the side");
+        // Clear of the top and the bottom of the screen too: Qt would
+        // squeeze a taller one in edge to edge.
         var top = d.parent.mapToItem(null, d.x, d.y);
-        verify(top.y >= -0.5 && top.y + d.height <= app.height + 0.5,
-               label + " taller than the window: y " + top.y + ", height " + d.height);
+        verify(top.y >= Units.gu(1) - 0.5 && top.y + d.height <= app.height - Units.gu(1) + 0.5,
+               label + " taller than the window: y " + top.y + ", height " + d.height + " of " + app.height);
     }
 
     function test_overview() {
@@ -278,6 +308,11 @@ TestCase {
         var row = l.itemAtIndex(0);
         verify(row && row.width > 0 && row.width <= l.width + 0.5, "first row " + (row ? row.width : "missing"));
         verify(row.cpuText.indexOf("%") > 0, "no CPU share: " + row.cpuText);
+        // The explanation under the list, apart from its last row.
+        var f = page().footer;
+        onScreen(f, "the explanation");
+        var gap = f.mapToItem(null, 0, 0).y - (l.mapToItem(null, 0, 0).y + l.height);
+        verify(gap >= Units.gu(1) - 0.5, "the explanation runs into the list: " + gap + " between them");
         shot("processes");
 
         findChild(page(), "searchField").text = "no such process anywhere";
@@ -290,7 +325,8 @@ TestCase {
         var d = openDetails();
         dialogFits(d, "the details");
         shot("details");
-        buttonsFit(d, "the details", true);
+        buttonsFit(d, "the details");
+        detailsReachable(d, "the details");
 
         mouseClick(findChild(d.contentItem, "endButton"));
         compare(d.confirming, "term");
@@ -312,10 +348,12 @@ TestCase {
         page().openDetails(pid);
         var d = page().processDialog;
         tryCompare(d, "opened", true);
+        waitForRendering(app.contentItem);
         verify(findChild(d.contentItem, "closeAppButton").visible);
         dialogFits(d, "an app's details");
         shot("details-app");
-        buttonsFit(d, "an app's details", true);
+        buttonsFit(d, "an app's details");
+        detailsReachable(d, "an app's details");
     }
 
     function test_refused() {
