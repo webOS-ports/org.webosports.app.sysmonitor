@@ -469,11 +469,12 @@ TestCase {
         verify(!app.sampler.running);
     }
 
+    // The devices' own screens are tst_screens.qml's, at their grid units;
+    // this is a window turned: the TouchPad's, held upright, gives up its
+    // second column.
     function test_layout_data() {
         return [
-            { tag: "phone 480x800", w: 480, h: 800, columns: 1 },
-            { tag: "Q25 720x720", w: 720, h: 720, columns: 1 },
-            { tag: "tablet 1024x768", w: 1024, h: 768, columns: 2 },
+            { tag: "tablet landscape 1024x768", w: 1024, h: 768, columns: 2 },
             { tag: "tablet portrait 768x1024", w: 768, h: 1024, columns: 1 }
         ];
     }

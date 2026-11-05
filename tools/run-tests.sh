@@ -5,7 +5,8 @@
 #
 # Always: the QML tests (tests/run-qml-tests.sh) - the parsing against the
 # devices' captured files, and the app's pages with stand-ins for the plugin
-# and the bus.
+# and the bus, and every screen once per device screen (screenshots in
+# build/test-output/ui).
 #
 # With APP_SYSROOT (an x86-64 sysroot from tests/host-sysroot.sh) and
 # QT_HOST (a LuneOS build's qtbase-native etc.): the C++ unit tests, built

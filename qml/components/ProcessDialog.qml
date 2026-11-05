@@ -61,10 +61,13 @@ Dialog {
     closePolicy: Popup.CloseOnPressOutside
     title: process ? process.name : ""
     width: Math.min(Units.gu(48), parent ? parent.width - Units.gu(4) : Units.gu(48))
+    // No taller than the screen: the details scroll instead (above).
+    height: parent ? Math.min(implicitHeight, parent.height - Units.gu(2)) : implicitHeight
 
     function show(p) {
         process = p;
         confirming = "";
+        detailsView.contentY = 0;
         open();
     }
 
@@ -89,73 +92,82 @@ Dialog {
                 dialog.close();
         }
 
-        // The details.
-        ColumnLayout {
+        // The details. On a short screen (the Q25's square) they are taller
+        // than the room the title and the buttons leave: they scroll there,
+        // and the buttons stay in view under them.
+        Flickable {
+            id: detailsView
+            objectName: "detailsView"
             visible: dialog.confirming === ""
             Layout.fillWidth: true
-            spacing: Units.gu(0.25)
+            Layout.fillHeight: true
+            Layout.preferredHeight: contentHeight
+            contentHeight: details.height
+            clip: true
+            interactive: contentHeight > height
+            boundsBehavior: Flickable.StopAtBounds
+            ScrollIndicator.vertical: ScrollIndicator {}
 
-            StatRow {
-                Layout.fillWidth: true
-                label: "Process"
-                value: dialog.process ? String(dialog.process.pid) : ""
-            }
-            StatRow {
-                Layout.fillWidth: true
-                visible: !!dialog.process && dialog.process.appId !== ""
-                label: "App"
-                value: dialog.process ? dialog.process.appId : ""
-            }
-            StatRow {
-                Layout.fillWidth: true
-                label: "State"
-                value: dialog.process ? Format.processState(dialog.process.state) : ""
-            }
-            StatRow {
-                Layout.fillWidth: true
-                label: "CPU"
-                value: dialog.process ? Format.percent(dialog.process.cpu) : ""
-            }
-            StatRow {
-                Layout.fillWidth: true
-                label: "Memory"
-                value: dialog.process ? Format.bytes(dialog.process.rss) : ""
-            }
-            StatRow {
-                Layout.fillWidth: true
-                label: "Threads"
-                value: dialog.process ? String(dialog.process.threads) : ""
-            }
-            StatRow {
-                Layout.fillWidth: true
-                label: "Parent"
-                value: dialog.process ? String(dialog.process.ppid) : ""
-            }
-            StatRow {
-                Layout.fillWidth: true
-                visible: dialog.uptime >= 0
-                label: "Running for"
-                value: dialog.process ? Format.duration(dialog.uptime - dialog.process.startTime / dialog.clockTicks) : ""
-            }
-            Label {
-                objectName: "cmdline"
-                Layout.fillWidth: true
-                visible: !!dialog.process && dialog.process.cmdline !== ""
-                text: dialog.process ? dialog.process.cmdline : ""
-                wrapMode: Text.WrapAnywhere
-                maximumLineCount: 4
-                elide: Text.ElideRight
-                color: Colors.secondaryText
-                font.pixelSize: FontUtils.sizeToPixels("small")
-            }
-            Label {
-                objectName: "refusal"
-                Layout.fillWidth: true
-                visible: dialog.refusal !== ""
-                text: dialog.refusal
-                wrapMode: Text.WordWrap
-                color: Colors.secondaryText
-                font.italic: true
+            // A Column: the rows have a height, not an implicit one.
+            Column {
+                id: details
+                width: detailsView.width
+                spacing: Units.gu(0.25)
+
+                StatRow {
+                    label: "Process"
+                    value: dialog.process ? String(dialog.process.pid) : ""
+                }
+                StatRow {
+                    visible: !!dialog.process && dialog.process.appId !== ""
+                    label: "App"
+                    value: dialog.process ? dialog.process.appId : ""
+                }
+                StatRow {
+                    label: "State"
+                    value: dialog.process ? Format.processState(dialog.process.state) : ""
+                }
+                StatRow {
+                    label: "CPU"
+                    value: dialog.process ? Format.percent(dialog.process.cpu) : ""
+                }
+                StatRow {
+                    label: "Memory"
+                    value: dialog.process ? Format.bytes(dialog.process.rss) : ""
+                }
+                StatRow {
+                    label: "Threads"
+                    value: dialog.process ? String(dialog.process.threads) : ""
+                }
+                StatRow {
+                    label: "Parent"
+                    value: dialog.process ? String(dialog.process.ppid) : ""
+                }
+                StatRow {
+                    visible: dialog.uptime >= 0
+                    label: "Running for"
+                    value: dialog.process ? Format.duration(dialog.uptime - dialog.process.startTime / dialog.clockTicks) : ""
+                }
+                Label {
+                    objectName: "cmdline"
+                    width: parent.width
+                    visible: !!dialog.process && dialog.process.cmdline !== ""
+                    text: dialog.process ? dialog.process.cmdline : ""
+                    wrapMode: Text.WrapAnywhere
+                    maximumLineCount: 4
+                    elide: Text.ElideRight
+                    color: Colors.secondaryText
+                    font.pixelSize: FontUtils.sizeToPixels("small")
+                }
+                Label {
+                    objectName: "refusal"
+                    width: parent.width
+                    visible: dialog.refusal !== ""
+                    text: dialog.refusal
+                    wrapMode: Text.WordWrap
+                    color: Colors.secondaryText
+                    font.italic: true
+                }
             }
         }
 

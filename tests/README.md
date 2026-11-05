@@ -32,6 +32,17 @@ separate script, not with the app's code.
   desktop stand-ins and `qml/imports`: a ProcReader and a ProcessModel over
   the fixtures (the test picks the device and which reading), and a
   LunaService answering from the fixtures and recording every call.
+- `tst_screens.qml`: every screen - the overview (top and bottom), the
+  app menu, the processes (and none found), a process's and an app's
+  details, the confirmation, a refusal's notice, the preferences - once
+  per device screen in `PROFILES` (default `mindphone q25 tp radon`),
+  each checked for being shown, not empty, inside the window and no wider
+  than it, and saved as `build/test-output/ui/<profile>-<screen>.png`.
+  On radon the notch and the rounded corners are painted over the picture
+  (`PanelShape.qml`), to show what the panel hides. The stand-ins read
+  their profile once as they load, so each profile runs against a copy of
+  `LunaNext/Common` whose default profile is that screen. `tst_parse` and
+  `tst_ui` run once; `TESTS=` skips them, `PROFILES=q25` runs one screen.
 
 luneos-components needs its desktop build (`CONFIG+=desktop`, see its
 README) for the style plugin. The stand-ins read the fixtures with

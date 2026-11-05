@@ -151,6 +151,16 @@ AppPage {
                 color: Colors.secondaryText
             }
         }
+
+        // Where the list ends: the explanation under it is set apart, not
+        // read as part of a row the list cuts off.
+        Rectangle {
+            objectName: "listEnd"
+            Layout.fillWidth: true
+            Layout.bottomMargin: Units.gu(1)
+            implicitHeight: 1
+            color: Colors.ruleDark
+        }
     }
 
     ProcessDialog {

@@ -200,7 +200,13 @@ Tests
   background, the processes read only while shown, sorting, search, apps by
   id, the details, ending and killing (and what may not be ended), closing
   an app, refusals shown, Escape, the preferences, launch parameters, and
-  the layout at 480x800, 720x720, 1024x768 and 768x1024.
+  the TouchPad's layout turned upright; `tst_screens.qml` opens every
+  screen on the mindphone (480x800), the Q25 (720x720), the TouchPad
+  (1024x768) and the FuriPhone FLX1s (radon, 720x1600, its notch and
+  corners painted on), each at that device's grid unit (`PROFILES`
+  overrides the list), checks nothing is hidden, empty, off the window or
+  wider than it, and saves each as
+  `build/test-output/ui/<profile>-<screen>.png` to look at.
 - **C++ unit tests** (`tests/unit`, gtest, through the x86-64 sysroot's
   loader): path confinement, reading files that report no size, the
   processes' stat lines (every line the three devices wrote), storage,
